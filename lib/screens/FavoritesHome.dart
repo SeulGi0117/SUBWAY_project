@@ -6,14 +6,14 @@ import 'package:subway_pro/models/Favorite_page_model.dart';
 import 'package:subway_pro/models/Favorite_list_model.dart';
 import 'package:provider/provider.dart';
 
-class Favorites extends StatefulWidget {
-  const Favorites({super.key});
+class FavoritesHome extends StatefulWidget {
+  const FavoritesHome({super.key});
 
   @override
-  State<Favorites> createState() => _FavoritesState();
+  State<FavoritesHome> createState() => _FavoritesHomeState();
 }
 
-class _FavoritesState extends State<Favorites> {
+class _FavoritesHomeState extends State<FavoritesHome> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

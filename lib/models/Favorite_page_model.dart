@@ -24,4 +24,6 @@ class FavoritePageModel extends ChangeNotifier {
     _itemIds.remove(item.id);
     notifyListeners();
   }
+
+  getById(int id) {}
 }
