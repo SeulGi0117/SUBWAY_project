@@ -4,8 +4,6 @@
 import 'package:flutter/material.dart';
 import 'package:subway_pro/screens/HomePage.dart';
 import 'package:subway_pro/screens/StationserchPage.dart';
-import 'package:subway_pro/screens/FavoritesHome.dart';
-import 'Favorite_screens/Favorite_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,8 +36,6 @@ class MyApp extends StatelessWidget {
             children: <Widget>[
               Homepage(),
               StationserchPage(),
-              FavoritesHome(),
-              FavoritePage()
             ],
           ),
         ),
