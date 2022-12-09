@@ -11,16 +11,16 @@ class Sub {
   String? line_num; // 호선 번호
 
   Sub({
-    required this.start_st,
-    required this.end_st,
-    required this.dept_time,
-    required this.arrv_time,
-    required this.time,
-    required this.week,
-    required this.transfer,
-    required this.fee,
-    required this.station_nm,
-    required this.line_num,
+    this.start_st,
+    this.end_st,
+    this.dept_time,
+    this.arrv_time,
+    this.time,
+    this.week,
+    this.transfer,
+    this.fee,
+    this.station_nm,
+    this.line_num,
   });
 
   factory Sub.fromJson(Map<String, dynamic> json) {

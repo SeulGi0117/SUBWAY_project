@@ -8,6 +8,7 @@ import 'package:subway_pro/screens/HomePage.dart';
 import 'package:subway_pro/screens/StationserchPage.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:subway_pro/screens/subHome.dart';
 
 void main() {
   runApp(const MyApp());
@@ -49,13 +50,14 @@ class MyApp extends StatelessWidget {
       title: 'SubwayMap',
       theme: ThemeData(),
       home: DefaultTabController(
-        length: 2,
+        length: 3,
         child: Scaffold(
           appBar: AppBar(
             bottom: const TabBar(
               tabs: [
                 Tab(icon: Text('메인홈페이지')),
                 Tab(icon: Text('역 검색')),
+                Tab(icon: Text('test')),
               ],
             ),
             title: const Text('지하철 노선도'),
@@ -64,6 +66,8 @@ class MyApp extends StatelessWidget {
             children: <Widget>[
               Homepage(),
               StationserchPage(),
+              Home(),
+
             ],
           ),
         ),
