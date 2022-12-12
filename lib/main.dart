@@ -4,11 +4,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:subway_pro/screens/HomePage.dart';
 import 'package:subway_pro/screens/StationserchPage.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:subway_pro/screens/subHome.dart';
+import 'package:subway_pro/subtest/sub_provider.dart';
+import 'package:subway_pro/subtest/sub_repository.dart';
 
 void main() {
   runApp(const MyApp());
@@ -46,7 +49,13 @@ class MyApp extends StatelessWidget {
     //   var content = jsonDecode(utf8.decode(value.bodyBytes));
     //   print(content['data']['route']);
     // }));
-    return MaterialApp(
+    return MultiProvider (
+      providers: [
+        ChangeNotifierProvider(create: (_) => SubProvider()),
+        Provider(create: (_) => SubRepoitory()),
+      ],
+      builder: (context, child) {
+        return MaterialApp(
       title: 'SubwayMap',
       theme: ThemeData(),
       home: DefaultTabController(
@@ -72,6 +81,8 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
+    );
+      },
     );
   }
 }
