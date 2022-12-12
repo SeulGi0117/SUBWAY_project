@@ -10,6 +10,7 @@ import 'package:subway_pro/screens/StationserchPage.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:subway_pro/screens/subHome.dart';
+import 'package:subway_pro/screens/testscreens.dart';
 import 'package:subway_pro/subtest/sub_provider.dart';
 import 'package:subway_pro/subtest/sub_repository.dart';
 
@@ -51,9 +52,10 @@ class MyApp extends StatelessWidget {
     // }));
     return MultiProvider (
       providers: [
-        ChangeNotifierProvider(create: (_) => SubProvider()),
+        ChangeNotifierProvider(create: (BuildContext context) => SubProvider()),
         Provider(create: (_) => SubRepoitory()),
       ],
+      // child: Home(),
       builder: (context, child) {
         return MaterialApp(
       title: 'SubwayMap',
@@ -66,7 +68,8 @@ class MyApp extends StatelessWidget {
               tabs: [
                 Tab(icon: Text('메인홈페이지')),
                 Tab(icon: Text('역 검색')),
-                Tab(icon: Text('test')),
+                Tab(icon: Text('provider test')),
+                // Tab(icon: Text('testscreecs')),
               ],
             ),
             title: const Text('지하철 노선도'),
@@ -76,6 +79,7 @@ class MyApp extends StatelessWidget {
               Homepage(),
               StationserchPage(),
               Home(),
+              // testscreens(),
 
             ],
           ),

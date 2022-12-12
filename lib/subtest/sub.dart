@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class Sub {
   String? start_st ; // 출발역
   String? end_st; // 도착역
@@ -32,31 +34,6 @@ class Sub {
     } else if (json["week"] == "HOL") {
       json["week"] = "요일 : 공휴일";
     }
-
-
-
-    // // 충전 방식
-    // if (json["cpTp"] == "1") {
-    //   json["cpTp"] = "충전 방식 : B타입(5핀)";
-    // } else if (json["cpTp"] == "2") {
-    //   json["cpTp"] = "충전 방식 : C타입(5핀)";
-    // } else if (json["cpTp"] == "3") {
-    //   json["cpTp"] = "충전 방식 : BC타입(5핀)";
-    // } else if (json["cpTp"] == "4") {
-    //   json["cpTp"] = "충전 방식 : BC타입(5핀)";
-    // } else if (json["cpTp"] == "5") {
-    //   json["cpTp"] = "충전 방식 : DC차데모";
-    // } else if (json["cpTp"] == "6") {
-    //   json["cpTp"] = "충전 방식 : AC3상";
-    // } else if (json["cpTp"] == "7") {
-    //   json["cpTp"] = "충전 방식 : DC콤보";
-    // } else if (json["cpTp"] == "8") {
-    //   json["cpTp"] = "충전 방식 : DC차데모+DC콤보";
-    // } else if (json["cpTp"] == "9") {
-    //   json["cpTp"] = "충전 방식 : DC차데모+AC3상";
-    // } else if (json["cpTp"] == "10") {
-    //   json["cpTp"] = "충전 방식 : DC차데모+DC콤보+AC3상";
-    // }
 
     return Sub(
       start_st: json["start_st"] as String,

@@ -31,7 +31,7 @@ class _testscreensState extends State<testscreens>{
     final String path = "/B553766/smt-path/path";
    var csvRead = await  http.post(
         Uri.parse(
-            "http://apis.data.go.kr/B553766/smt-path/path",
+            "https://apis.data.go.kr/B553766/smt-path/path?serviceKey=4fskVJh2CpFFANbJ0JCuuX0%2F90cRzEKtJAdFvkgjcZyq%2F6bd%2BWlBvJD8IZuwtFaTGK7ku4VvkcyJx05A9rK7cg%3D%3D&pageNo=1&numOfRows=10&dept_station_code=2728&dest_station_code=0214&week=DAY&search_type=FASTEST&dept_time=120001",
         )
    );
     try {
