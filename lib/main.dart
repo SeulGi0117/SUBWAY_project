@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
     //   var content = jsonDecode(utf8.decode(value.bodyBytes));
     //   print(content['data']['route']);
     // }));
-    return MultiProvider (
+    return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (BuildContext context) => SubProvider()),
         Provider(create: (_) => SubRepoitory()),
@@ -58,34 +58,33 @@ class MyApp extends StatelessWidget {
       // child: Home(),
       builder: (context, child) {
         return MaterialApp(
-      title: 'SubwayMap',
-      theme: ThemeData(),
-      home: DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: AppBar(
-            bottom: const TabBar(
-              tabs: [
-                Tab(icon: Text('메인홈페이지')),
-                Tab(icon: Text('역 검색')),
-                Tab(icon: Text('provider test')),
-                // Tab(icon: Text('testscreecs')),
-              ],
+          title: 'SubwayMap',
+          theme: ThemeData(),
+          home: DefaultTabController(
+            length: 4,
+            child: Scaffold(
+              appBar: AppBar(
+                bottom: const TabBar(
+                  tabs: [
+                    Tab(icon: Text('메인홈페이지')),
+                    Tab(icon: Text('역 검색')),
+                    Tab(icon: Text('provider test')),
+                    Tab(icon: Text('testscreens test')),
+                  ],
+                ),
+                title: const Text('지하철 노선도'),
+              ),
+              body: TabBarView(
+                children: <Widget>[
+                  Homepage(),
+                  StationserchPage(),
+                  Home(),
+                  testscreens(),
+                ],
+              ),
             ),
-            title: const Text('지하철 노선도'),
           ),
-          body: TabBarView(
-            children: <Widget>[
-              Homepage(),
-              StationserchPage(),
-              Home(),
-              // testscreens(),
-
-            ],
-          ),
-        ),
-      ),
-    );
+        );
       },
     );
   }
