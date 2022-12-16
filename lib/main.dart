@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
       title: 'SubwayMap',
       theme: ThemeData(),
       home: DefaultTabController(
-        length: 4,
+        length: 5,
         child: Scaffold(
           appBar: AppBar(
             bottom: const TabBar(
@@ -71,6 +71,7 @@ class MyApp extends StatelessWidget {
                 Tab(icon: Text('역 검색')),
                 Tab(icon: Text('provider test')),
                 Tab(icon: Text('공홈 json 예제 테스트')),
+                Tab(icon: Text('testscreens test')),
                 // Tab(icon: Text('testscreecs')),
               ],
             ),
@@ -82,6 +83,7 @@ class MyApp extends StatelessWidget {
               StationserchPage(),
               Home(),
               Test1(),
+              testscreens(),
               // testscreens(),
 
             ],
