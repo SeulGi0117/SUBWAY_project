@@ -36,16 +36,16 @@ class Sub {
     }
 
     return Sub(
-      start_st: json["start_st"] as String,
-      end_st: json["end_st"] as String,
-      dept_time: json["dept_time"] as String,
-      arrv_time: json["arrv_time"] as String,
-      time: json["cpTp"] as String,
-      week: json["csNm"] as String,
-      transfer: json["transfet"] as String,
-      fee: json["fee"] as String,
-      station_nm: json["station_nm"] as String,
-      line_num: json["line_num"] as String,
+      start_st: json["start_st"],
+      end_st: json["end_st"],
+      dept_time: json["dept_time"],
+      arrv_time: json["arrv_time"],
+      time: json["cpTp"],
+      week: json["csNm"],
+      transfer: json["transfet"],
+      fee: json["fee"],
+      station_nm: json["station_nm"],
+      line_num: json["line_num"],
     );
   }
 }
