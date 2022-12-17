@@ -25,6 +25,10 @@ class Sub {
     this.line_num,
   });
 
+  // Sub.fromJson(Map<String, dynamic> json) {
+
+  // }
+
   factory Sub.fromJson(Map<String, dynamic> json) {
     //  요일 : 주중 토요일 공휴일
     if (json["week"] == "DAY") {

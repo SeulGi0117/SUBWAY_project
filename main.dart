@@ -2,17 +2,21 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_application_1/route_subway_model.dart';
+// import 'package:flutter_application_1/route_subway_model.dart';
+import 'package:subway_pro/test1/route_subway_model.dart';
 
 enum SubwayInfo {
-  wangsimni(name: '왕십리', number: 209),
-  gangnam(name: '강남', number: 222);
+  wangsimni(name: '왕십리', number: 0209),
+  gangnam(name: '강남', number: 0222);
 
   final String name;
   final int number;
 
   const SubwayInfo({required this.name, required this.number});
 }
+
+String num1 = "0150";
+String num2 = "0151";
 
 const apiKey =
     'fSYsW9vfF6O3YjnQSCOx2EKU3HYtjUM9E8a1%2FYcAjfFnVP9RaCFbllgzXd%2BX%2FwiX6yefRR8qE%2Fi0B3ers9Y4jw%3D%3D';
@@ -23,15 +27,25 @@ class SubwayDataSource {
     try {
       final response = await http.get(
         Uri.parse(
-            'http://apis.data.go.kr/B553766/smt-path/path?serviceKey=$apiKey&numOfRows=10&pageNo=1&dept_station_code=${startInfo.number}&dest_station_code=${arrivalInfo.name}&week=DAY'),
+            'http://apis.data.go.kr/B553766/smt-path/path?serviceKey=$apiKey&numOfRows=10&pageNo=1&dept_station_code=${num1}&dest_station_code=${num2}&week=DAY&search_type=FASTEST&dept_time=120001'),  // startInfo.number  , arrivalInfo.number
       );
-      print('---');
-      print(response.body);
-      print('---');
-      Iterable iterable = jsonDecode(response.body)['data'][0]['route'];
+
+      print('1-----------------------------1');
+      var content = jsonDecode(utf8.decode(response.bodyBytes));
+      print(content['data']['route']);
+      print('2-----------------------------2');
+      
+      // print(response.body);
+      
+
+      
+
+      Iterable iterable = jsonDecode(response.body);  //['data'][0]['route']
       return iterable.map((e) => RouteSubwayModel.fromJson(e)).toList();
     } catch (e) {
-      throw (Exception());
+      throw (Exception(
+        'Failed to load'
+      ));
     }
   }
 }
