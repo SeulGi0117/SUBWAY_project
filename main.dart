@@ -1,54 +1,19 @@
+// mian.dart
+// import 'dart:html';
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+// import 'package:subway_pro/Test1.dart';
+import 'package:subway_pro/screens/HomePage.dart';
+import 'package:subway_pro/screens/StationserchPage.dart';
+
 import 'package:http/http.dart' as http;
-// import 'package:flutter_application_1/route_subway_model.dart';
-import 'package:subway_pro/test1/route_subway_model.dart';
-
-enum SubwayInfo {
-  wangsimni(name: '왕십리', number: 0209),
-  gangnam(name: '강남', number: 0222);
-
-  final String name;
-  final int number;
-
-  const SubwayInfo({required this.name, required this.number});
-}
-
-String num1 = "0150";
-String num2 = "0151";
-
-const apiKey =
-    'fSYsW9vfF6O3YjnQSCOx2EKU3HYtjUM9E8a1%2FYcAjfFnVP9RaCFbllgzXd%2BX%2FwiX6yefRR8qE%2Fi0B3ers9Y4jw%3D%3D';
-
-class SubwayDataSource {
-  Future<List<RouteSubwayModel>> getSubway(
-      SubwayInfo startInfo, SubwayInfo arrivalInfo) async {
-    try {
-      final response = await http.get(
-        Uri.parse(
-            'http://apis.data.go.kr/B553766/smt-path/path?serviceKey=$apiKey&numOfRows=10&pageNo=1&dept_station_code=${num1}&dest_station_code=${num2}&week=DAY&search_type=FASTEST&dept_time=120001'),  // startInfo.number  , arrivalInfo.number
-      );
-
-      print('1-----------------------------1');
-      var content = jsonDecode(utf8.decode(response.bodyBytes));
-      print(content['data']['route']);
-      print('2-----------------------------2');
-      
-      // print(response.body);
-      
-
-      
-
-      Iterable iterable = jsonDecode(response.body);  //['data'][0]['route']
-      return iterable.map((e) => RouteSubwayModel.fromJson(e)).toList();
-    } catch (e) {
-      throw (Exception(
-        'Failed to load'
-      ));
-    }
-  }
-}
+import 'package:subway_pro/screens/subHome.dart';
+// import 'package:subway_pro/test/homepage.dart';
+import 'package:subway_pro/subtest/sub_provider.dart';
+import 'package:subway_pro/subtest/sub_repository.dart';
 
 void main() {
   runApp(const MyApp());
@@ -57,135 +22,75 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
+    // final String url = "apis.data.go.kr";
+    // final String path = "/B553766/smt-path/path";
+    // //pageNo=1&numOfRows=10&dept_station_code=2728&dest_station_code=0214&week=DAY&search_type=FASTEST&dept_time=120001";
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  late TextEditingController startController;
-  late TextEditingController arrivalController;
-  late SubwayDataSource subwayDataSource;
-  List<RouteSubwayModel> routeSubwayModels = [];
-  bool? isLoading;
-
-  @override
-  void initState() {
-    super.initState();
-    startController = TextEditingController(text: '왕십리');
-    arrivalController = TextEditingController(text: '강남');
-    subwayDataSource = SubwayDataSource();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(controller: startController),
-            const SizedBox(
-              height: 20.0,
+    // // http
+    // //     .get(Uri.https(url, path, {
+    // //   'serviceKey':
+    // //       '4fskVJh2CpFFANbJ0JCuuX0%2F90cRzEKtJAdFvkgjcZyq%2F6bd%2BWlBvJD8IZuwtFaTGK7ku4VvkcyJx05A9rK7cg%3D%3D',
+    // //   'pageNo': '1',
+    // //   'numOfRows': '10',
+    // //   'dept_station_code': '2728',
+    // //   'dest_station_code': '0214',
+    // //   'week': 'DAY',
+    // //   'search_type': 'FASTEST',
+    // //   'dept_time': '120001',
+    // // }))
+    // //     .then(((value) {
+    // //   print(value.body);
+    // // }));
+    // http.get(
+    //     Uri.parse(
+    //         "https://apis.data.go.kr/B553766/smt-path/path?serviceKey=4fskVJh2CpFFANbJ0JCuuX0%2F90cRzEKtJAdFvkgjcZyq%2F6bd%2BWlBvJD8IZuwtFaTGK7ku4VvkcyJx05A9rK7cg%3D%3D&pageNo=1&numOfRows=10&dept_station_code=2728&dest_station_code=0214&week=DAY&search_type=FASTEST&dept_time=120001"),
+    //     headers: {"Accept": "application/json"}).then(((value) {
+    //   var content = jsonDecode(utf8.decode(value.bodyBytes));
+    //   print(content['data']['route']);
+    // }));
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (BuildContext context) => SubProvider()),
+        Provider(create: (_) => SubRepoitory()),
+      ],
+      // child: Home(),
+      builder: (context, child) {
+        return MaterialApp(
+          title: 'SubwayMap',
+          theme: ThemeData(),
+          home: DefaultTabController(
+            length: 3,
+            child: Scaffold(
+              appBar: AppBar(
+                bottom: const TabBar(
+                  tabs: [
+                    Tab(icon: Text('메인홈페이지')),
+                    Tab(icon: Text('역 검색')),
+                    Tab(icon: Text('provider test')),
+                    // Tab(icon: Text('공홈 json 예제 테스트')),
+                    // Tab(icon: Text('homepage')),
+                    // Tab(icon: Text('testscreecs')),
+                  ],
+                ),
+                title: const Text('지하철 노선도'),
+              ),
+              body: TabBarView(
+                children: <Widget>[
+                  Homepage(),
+                  StationserchPage(),
+                  Home(),
+                  // Test1(),
+                  // Hompage(),
+                  // testscreens(),
+                ],
+              ),
             ),
-            TextField(controller: arrivalController),
-            const SizedBox(
-              height: 20.0,
-            ),
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  isLoading = true;
-                });
-
-                try {
-                  List<SubwayInfo> values = SubwayInfo.values;
-                  SubwayInfo startInfo =
-                      values.firstWhere((e) => e.name == startController.text);
-                  SubwayInfo arrivalInfo = values
-                      .firstWhere((e) => e.name == arrivalController.text);
-                  subwayDataSource
-                      .getSubway(startInfo, arrivalInfo)
-                      .then((value) {
-                    setState(() {
-                      routeSubwayModels = value;
-                    });
-                  });
-
-                  setState(() {
-                    isLoading = false;
-                  });
-                } catch (e) {
-                  setState(() {
-                    isLoading = null;
-                  });
-                }
-              },
-              child: const Text('검색하기'),
-            ),
-            const SizedBox(height: 30.0),
-            if (isLoading != null) buildInfo(),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
-  }
-
-  Widget buildInfo() {
-    if (routeSubwayModels.isEmpty) {
-      return const SizedBox();
-    }
-
-    if (isLoading == true) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
-    return Expanded(
-      child: ListView.separated(
-        itemCount: routeSubwayModels.length,
-        itemBuilder: (context, index) {
-          return SubwayInfoChip(
-            model: routeSubwayModels[index],
-          );
-        },
-        separatorBuilder: (_, __) {
-          return const Divider(height: 25);
-        },
-      ),
-    );
-  }
-}
-
-class SubwayInfoChip extends StatelessWidget {
-  const SubwayInfoChip({Key? key, required this.model}) : super(key: key);
-  final RouteSubwayModel model;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(children: [
-      Text('${model.lineNum}호선'),
-      const SizedBox(height: 10.0),
-      Text('${model.stationNm}역'),
-    ]);
   }
 }
