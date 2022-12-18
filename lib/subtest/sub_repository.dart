@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
+import 'dart:convert' as convert;
 import 'package:subway_pro/subtest/sub.dart';
 import 'package:http/http.dart' as http;
 import 'package:subway_pro/screens/StationserchPage.dart';
@@ -9,9 +9,10 @@ class SubRepoitory {
   var apiKey =
       "4fskVJh2CpFFANbJ0JCuuX0%2F90cRzEKtJAdFvkgjcZyq%2F6bd%2BWlBvJD8IZuwtFaTGK7ku4VvkcyJx05A9rK7cg%3D%3D";
 
-  Future<List<Sub>?> loadSubs() async {
-    var st_num = "0150";
-    var ar_num = "0151";
+  Future<List<dynamic>?> loadSubs() async {
+    // var start_st = "어린이대공원";
+    String? st_num = "0150";
+    String? ar_num = "0151";
 
     String baseUrl =
         "https://apis.data.go.kr/B553766/smt-path/path?serviceKey=$apiKey&pageNo=1&numOfRows=10&dept_station_code=${st_num}&dest_station_code=${ar_num}&week=DAY&search_type=FASTEST&dept_time=120001";
@@ -26,20 +27,29 @@ class SubRepoitory {
 
     // 데이터 가져오기
     // var body = convert.utf8.decode(response.bodyBytes);
+    final body = convert.utf8.decode(response.bodyBytes);
 
-    var content = jsonDecode(utf8.decode(response.bodyBytes));
-    print("1__________________________________1");
-    print(content['data']['route']);
-    print("2__________________________________2");
+    // var content = jsonDecode(utf8.decode(response.bodyBytes));
+    // print("1__________________________________1");
+    // print(content['data']['route']);
+    // print("2__________________________________2");
 
     // 필요한 데이터 찾기
+
+    Map<String, dynamic> jsonResult =
+    convert.json.decode(body) as Map<String, dynamic>;
+
+    final jsonSub = jsonResult['data']["route"];
+    print(jsonSub);
+
 
     // Map<String, dynamic> json = jsonDecode(start_st);
     // Sub sub = Sub.fromJson(json);
     // Map<String, dynamic>jsonData = jsonDecode(jsonString);
-    Map<String, dynamic> json = jsonDecode(utf8.decode(response.bodyBytes));
-    final jsonSub = json['response']['body']['items'];
-    Sub sub = Sub.fromJson(json);
+    
+    // Map<String, dynamic> json = jsonDecode(utf8.decode(response.bodyBytes));
+    // final jsonSub = json['body'];
+    // Sub sub = Sub.fromJson(json);
 
 //     const jsonString =
 //         '{"text": "foo", "value": 1, "status": false, "extra": null}';
@@ -65,12 +75,12 @@ class SubRepoitory {
 //     print(item['status']); // false
 
     // 필요한 데이터 그룹이 있다면
-    if (jsonSub['item'] != null) {
+    if (jsonSub['start_cd'] != null) {
       // map을 통해 데이터를 전달하기 위해 객체인 List로 만든다.
-      List<dynamic> list = jsonSub['item'];
+      List<dynamic> list = jsonSub['start_cd'];
 
       // map을 통해 Sub형태로 item을  => Sub.fromJson으로 전달
-      return list.map<Sub>((item) => Sub.fromJson(item)).toList();
+      return list.map<Sub>((start_cd) => Sub.fromJson(start_cd)).toList();
 
       }
 
