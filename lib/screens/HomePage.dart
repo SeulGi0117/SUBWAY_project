@@ -29,7 +29,7 @@ class _HomepageState extends State<Homepage> {
             "https://apis.data.go.kr/B553766/smt-path/path?serviceKey=$apiKey&pageNo=1&numOfRows=10&dept_station_code=${st_num}&dest_station_code=${ar_num}&week=DAY&search_type=FASTEST&dept_time=120001"),
         headers: {"Accept": "application/json"}).then(((value) {
       var content = jsonDecode(utf8.decode(value.bodyBytes));
-      print(content['data']);
+      // print(content['data']);
     }));
 
     return Scaffold(

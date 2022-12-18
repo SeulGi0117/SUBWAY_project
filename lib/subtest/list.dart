@@ -114,7 +114,7 @@ class ListWidget extends StatelessWidget {
   }
 
   // 리스트 뷰
-  Widget _makeListView(List<Sub> subs) {
+  Widget _makeListView(List<dynamic> subs) {
     return ListView.separated(
       itemCount: subs.length,
       itemBuilder: (BuildContext context, int index) {
