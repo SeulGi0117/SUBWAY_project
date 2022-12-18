@@ -23,29 +23,29 @@ Future<Subway> fetchSubway() async {
 
 
 class Subway{
-  String? start_st; // 출발역
-  String? end_st; // 도착역
-  String? dept_time; // 출발시간
-  String? arrv_time; // 도착시간
-  String? time; // 소요시간
-  String? week; // 요일
-  String? transfer; // 환승횟수
-  String? fee; // 운임정보 (요금)
-  String? station_nm; // 경로 역사명
-  String? line_num; // 호선 번호
-
   Subway({
-    this.start_st,
-    this.end_st,
-    this.dept_time,
-    this.arrv_time,
-    this.time,
-    this.week,
-    this.transfer,
-    this.fee,
-    this.station_nm,
-    this.line_num,
+    required this.start_st,
+    required this.end_st,
+    required this.dept_time,
+    required this.arrv_time,
+    required this.time,
+    required this.week,
+    required this.transfer,
+    required this.fee,
+    required this.station_nm,
+    required this.line_num,
   });
+
+  String start_st; // 출발역
+  String end_st; // 도착역
+  String dept_time; // 출발시간
+  String arrv_time; // 도착시간
+  String time; // 소요시간
+  String week; // 요일
+  String transfer; // 환승횟수
+  String fee; // 운임정보 (요금)
+  String station_nm; // 경로 역사명
+  String line_num; // 호선 번호
   
   factory Subway.fromJson(Map<String, dynamic> json) {
     return Subway(
