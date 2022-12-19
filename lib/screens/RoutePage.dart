@@ -8,13 +8,9 @@ import 'HomePage.dart';
 
 class RoutePage extends StatefulWidget {
   final String startStation;
-  final String middleStation;
   final String endStation;
   const RoutePage(
-      {super.key,
-      required this.startStation,
-      required this.middleStation,
-      required this.endStation});
+      {super.key, required this.startStation, required this.endStation});
 
   @override
   State<RoutePage> createState() => _RoutePageState();
@@ -70,12 +66,12 @@ class _RoutePageState extends State<RoutePage> {
                               // ignore: prefer_const_constructors
                               Text(
                                 '최단 경로',
-                                style: TextStyle(fontSize: 40),
+                                style: TextStyle(fontSize: 30),
                               ),
                               const SizedBox(width: 50.0),
                               Text(
                                 '소요 시간 : 13분',
-                                style: TextStyle(fontSize: 35),
+                                style: TextStyle(fontSize: 25),
                               ),
                             ],
                           ),
@@ -154,33 +150,15 @@ class _RoutePageState extends State<RoutePage> {
                         const SizedBox(
                           height: 50,
                         ),
+                        const Text(
+                          '출발',
+                          style: TextStyle(fontSize: 15),
+                        ),
                         Padding(
                             // ignore: sort_child_properties_last
                             child: TextField(
                               decoration: InputDecoration(
                                   labelText: widget.startStation,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                  )),
-                              maxLength: 10,
-                            ),
-                            padding: EdgeInsets.all(20.0)),
-                        const SizedBox(
-                          height: 50,
-                        ),
-                        const Text(
-                          '경유',
-                          style: TextStyle(fontSize: 15),
-                        ),
-                        Padding(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                  labelText: widget.middleStation,
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10.0)),
