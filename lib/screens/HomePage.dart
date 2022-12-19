@@ -17,9 +17,8 @@ class _HomepageState extends State<Homepage> {
     final String url = "apis.data.go.kr";
     final String path = "/B553766/smt-path/path";
 
-       var apiKey =
-      "4fskVJh2CpFFANbJ0JCuuX0%2F90cRzEKtJAdFvkgjcZyq%2F6bd%2BWlBvJD8IZuwtFaTGK7ku4VvkcyJx05A9rK7cg%3D%3D";
-    
+    var apiKey =
+        "4fskVJh2CpFFANbJ0JCuuX0%2F90cRzEKtJAdFvkgjcZyq%2F6bd%2BWlBvJD8IZuwtFaTGK7ku4VvkcyJx05A9rK7cg%3D%3D";
 
     String? st_num = "0150";
     String? ar_num = "0151";
@@ -29,7 +28,7 @@ class _HomepageState extends State<Homepage> {
             "https://apis.data.go.kr/B553766/smt-path/path?serviceKey=$apiKey&pageNo=1&numOfRows=10&dept_station_code=${st_num}&dest_station_code=${ar_num}&week=DAY&search_type=FASTEST&dept_time=120001"),
         headers: {"Accept": "application/json"}).then(((value) {
       var content = jsonDecode(utf8.decode(value.bodyBytes));
-      print(content['data']);
+      // print(content['data']);
     }));
 
     return Scaffold(
