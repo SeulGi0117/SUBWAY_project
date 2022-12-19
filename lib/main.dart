@@ -18,7 +18,6 @@ enum SubwayInfo {
 String? num1 = "";
 String num2 = "0151";
 
-
 const apiKey =
     'fSYsW9vfF6O3YjnQSCOx2EKU3HYtjUM9E8a1%2FYcAjfFnVP9RaCFbllgzXd%2BX%2FwiX6yefRR8qE%2Fi0B3ers9Y4jw%3D%3D';
 
@@ -27,26 +26,27 @@ class SubwayDataSource {
       SubwayInfo startInfo, SubwayInfo arrivalInfo) async {
     try {
       final response = await http.get(
-        Uri.parse(
-            'http://apis.data.go.kr/B553766/smt-path/path?serviceKey=$apiKey&numOfRows=10&pageNo=1&dept_station_code=${num1}&dest_station_code=${num2}&week=DAY&search_type=FASTEST&dept_time=120001'),  // startInfo.number  , arrivalInfo.number
-      );
+          Uri.parse(
+              'http://apis.data.go.kr/B553766/smt-path/path?serviceKey=$apiKey&numOfRows=10&pageNo=1&dept_station_code=${num1}&dest_station_code=${num2}&week=DAY&search_type=FASTEST&dept_time=120001'), // startInfo.number  , arrivalInfo.number
+          headers: {"Accept": "application/json"}).then(((value) {
+        var content = jsonDecode(utf8.decode(value.bodyBytes));
+        print('1-----------------------1');
+        print(content['data']['route']);
+        print('1-----------------------1');
+        Text(content['data']['route']);
+      }));
 
-      print('1-----------------------------1');
+      print('2-----------------------------2');
       var content = jsonDecode(utf8.decode(response.bodyBytes));
       print(content['data']['route']);
       print('2-----------------------------2');
-      
+
       // print(response.body);
-      
 
-      
-
-      Iterable iterable = jsonDecode(response.body);  //['data'][0]['route']
+      Iterable iterable = jsonDecode(response.body); //['data'][0]['route']
       return iterable.map((e) => RouteSubwayModel.fromJson(e)).toList();
     } catch (e) {
-      throw (Exception(
-        'Failed to load'
-      ));
+      throw (Exception('Failed to load'));
     }
   }
 }
@@ -80,7 +80,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   final num1Contorller = TextEditingController();
   final num2Contorller = TextEditingController();
 
@@ -90,10 +89,10 @@ class _MyHomePageState extends State<MyHomePage> {
   List<RouteSubwayModel> routeSubwayModels = [];
   bool? isLoading;
 
-   @override
+  @override
   void dispose() {
-   num1Contorller.dispose();
-   num2Contorller.dispose();
+    num1Contorller.dispose();
+    num2Contorller.dispose();
     super.dispose();
   }
 
@@ -124,26 +123,37 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(
               height: 20.0,
             ),
-            
+            // 텍스트 출력
+            Text("지하철 노선 경로"),
+            Text(""),
+            // Text(jsonDecode(utf8.decode())),
+            // Text(RouteSubwayModel.);
+            // var content = jsonDecode(utf8.decode(value.bodyBytes));
+
             // 출발역 코드 받기
-            TextField(controller: num1Contorller,
-            onChanged: (text) {
-              num1 = text;
-            },
-            ),const SizedBox(
+            TextField(
+              controller: num1Contorller,
+              onChanged: (text) {
+                num1 = text;
+              },
+            ),
+            const SizedBox(
               height: 20.0,
             ),
 
-            IconButton(onPressed: () {
-              num1 = num1Contorller.value.toString();
-            }, icon: Icon(Icons.check)),
-
+            IconButton(
+                onPressed: () {
+                  num1 = num1Contorller.value.toString();
+                },
+                icon: Icon(Icons.check)),
 
             TextButton(
               onPressed: () {
-                setState(() {
-                  isLoading = true;
-                },);
+                setState(
+                  () {
+                    isLoading = true;
+                  },
+                );
 
                 try {
                   List<SubwayInfo> values = SubwayInfo.values;
