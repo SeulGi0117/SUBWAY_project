@@ -1,4 +1,3 @@
-// StationserchPage.dart
 // ignore_for_file: unnecessary_new, prefer_const_constructors
 
 import 'package:flutter/material.dart';
@@ -24,8 +23,8 @@ class _StationserchPageState extends State<StationserchPage> {
   TextEditingController inputController2 = TextEditingController();
   String inputText2 = '';
 
-  TextEditingController inputController3 = TextEditingController();
-  String inputText3 = '';
+  TextEditingController inputController4 = TextEditingController();
+  String inputText4 = '';
 
   @override
   void initState() {
@@ -329,7 +328,7 @@ class _StationserchPageState extends State<StationserchPage> {
                     Padding(
                         // ignore: sort_child_properties_last
                         child: TextField(
-                          controller: inputController3,
+                          controller: inputController4,
                           decoration: InputDecoration(
                               labelText: '도착역',
                               focusedBorder: OutlineInputBorder(
@@ -380,7 +379,8 @@ class _StationserchPageState extends State<StationserchPage> {
                                 MaterialPageRoute(
                                     builder: (_) => RoutePage(
                                           startStation: inputController2.text,
-                                          endStation: inputController3.text,
+                                          endStation: inputController4.text,
+                                          middleStation: '',
                                         )),
                               );
                             },
