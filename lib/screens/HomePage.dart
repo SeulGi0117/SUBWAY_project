@@ -1,5 +1,6 @@
 // Homepage.dart
 import 'package:flutter/material.dart';
+import 'package:subway_pro/screens/StationCode.dart';
 import 'package:subway_pro/screens/StationserchPage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -76,7 +77,7 @@ class _HomepageState extends State<Homepage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (_) => StationserchPage()),
+                                  builder: (_) => StationCode()),
                             );
                           },
                           icon: const Icon(
